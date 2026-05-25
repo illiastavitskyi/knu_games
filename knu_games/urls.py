@@ -9,6 +9,7 @@ urlpatterns = [
 
     path('', include('games.urls')),
     path('users/', include('users.urls')),
+path('orders/', include('orders.urls')), # Кошик та покупки
 ]
 
 if settings.DEBUG:
