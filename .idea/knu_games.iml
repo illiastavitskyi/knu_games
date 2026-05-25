@@ -8,4 +8,8 @@
     <orderEntry type="jdk" jdkName="Python 3.13 virtualenv at C:\Users\User\PycharmProjects\knu_games\.venv (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
+  </component>
 </module>
