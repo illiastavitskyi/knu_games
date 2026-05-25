@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KNU Games</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; color: #333; }
+
+        /* Стилі для навігаційної панелі */
+        .navbar { background-color: #212121; overflow: hidden; display: flex; justify-content: space-between; padding: 0 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .navbar a { display: block; color: #f2f2f2; text-align: center; padding: 16px 20px; text-decoration: none; font-size: 16px; transition: 0.3s; }
+        .navbar a:hover { background-color: #4CAF50; color: white; }
+
+        /* Блоки меню (лівий і правий) */
+        .nav-left, .nav-right { display: flex; }
+
+        /* Стиль для основного контенту */
+        .content { padding: 40px; max-width: 1200px; margin: 0 auto; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+
+    <div class="nav-left">
+        <a href="/" style="font-weight: bold; font-size: 18px;">🎮 KNU Games</a>
+        <a href="/">Головна</a>
+        <a href="/catalog/">Каталог</a>
+    </div>
+
+  <div class="nav-right">
+        {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+                <a href="/add-game/">+ Додати гру</a>
+            {% endif %}
+            <a href="/orders/cart/">🛒 Кошик</a>
+            <a href="/users/profile/">👤 Профіль ({{ user.username }})</a>
+            <a href="{% url 'logout' %}" style="color: #ff5252;">Вийти</a>
+        {% else %}
+            <a href="/users/login/">Вхід</a>
+            <a href="/users/register/">Реєстрація</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

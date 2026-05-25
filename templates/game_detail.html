@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="display: flex; gap: 30px; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+    
+    <div style="flex: 1;">
+        {% if game.image %}
+            <img src="{{ game.image.url }}" alt="{{ game.title }}" style="width: 100%; border-radius: 8px;">
+        {% else %}
+            <div style="width: 100%; height: 300px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 8px;">Немає фото</div>
+        {% endif %}
+    </div>
+
+    <div style="flex: 2;">
+        <h1 style="margin-top: 0;">{{ game.title }}</h1>
+        <p style="color: #666; font-size: 16px;">Категорія: {{ game.category }} | Розробник: {{ game.developer }}</p>
+        <p><strong>Дата випуску:</strong> {{ game.release_date|date:"d.m.Y" }}</p>
+        
+        <h2 style="color: #4CAF50;">${{ game.price }}</h2>
+        
+        <div style="margin: 20px 0; line-height: 1.6;">
+            <h3>Опис:</h3>
+            <p>{{ game.description }}</p>
+        </div>
+
+        <div style="margin-top: 30px;">
+            {% if user.is_authenticated %}
+                <a href="/orders/add-to-cart/{{ game.id }}/" style="display: inline-block; background: #4CAF50; color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px; font-weight: bold;">Додати в кошик</a>
+            {% else %}
+                <a href="{% url 'login' %}" style="display: inline-block; background: #9e9e9e; color: white; padding: 12px 25px; text-decoration: none; border-radius: 4px;">Увійдіть для покупки</a>
+            {% endif %}
+            
+            <a href="{% url 'catalog' %}" style="margin-left: 15px; color: #2196F3; text-decoration: none;">← До каталогу</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,12 +1,38 @@
-<h1>Hello, {{ request.user.username }}!</h1>
-<h2>Your Balance: ${{ profile.balance }}</h2>
+{% extends 'base.html' %}
 
-<h3>Your Games:</h3>
-<ul>
-    {% for game in purchased_games %}
-        <li>{{ game.title }} ({{ game.category }})</li>
-    {% empty %}
-        <p>You haven't bought any games yet.</p>
-    {% endfor %}
-</ul>
-<a href="/catalog/">Back to Store</a>
+{% block content %}
+    <div style="display: flex; gap: 30px;">
+        <div style="flex: 1; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: fit-content;">
+            <h2>Привіт, {{ request.user.username }}!</h2>
+            <h3 style="color: #4CAF50;">Ваш баланс: ${{ profile.balance }}</h3>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+            
+            <h4>Поповнити рахунок</h4>
+            <form action="{% url 'deposit' %}" method="post" style="display: flex; gap: 10px;">
+                {% csrf_token %}
+                <input type="number" name="amount" min="1" step="0.01" placeholder="Сума (напр. 50)" required style="padding: 8px; flex: 1;">
+                <button type="submit" style="background: #2196F3; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">Поповнити</button>
+            </form>
+        </div>
+
+        <div style="flex: 2; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <h2>Ваша бібліотека ігор 🎮</h2>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+                {% for game in purchased_games %}
+                    <div style="padding: 15px; border: 1px solid #eee; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <a href="{% url 'game_detail' game.id %}" style="text-decoration: none; color: #333;">
+                                <strong style="font-size: 18px; transition: color 0.3s;" onmouseover="this.style.color='#2196F3'" onmouseout="this.style.color='#333'">{{ game.title }}</strong>
+                            </a>
+                            <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">{{ game.category }} | Розробник: {{ game.developer }}</p>
+                        </div>
+                        <button style="background: #333; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;">Грати</button>
+                    </div>
+                {% empty %}
+                    <p style="color: #666;">Ви ще не придбали жодної гри.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

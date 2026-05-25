@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>KNU Games</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1 style="text-align:center; margin-top:300px;">
-    KNU Games
-</h1>
+{% block content %}
+    <div style="text-align: center; padding: 50px 20px;">
+        <h1 style="font-size: 40px; margin-bottom: 20px;">Вітаємо у KNU Games! 🎮</h1>
+        <p style="font-size: 20px; color: #666; max-width: 600px; margin: 0 auto 40px auto;">
+            Ваш персональний портал для найкращих відеоігор. Досліджуйте каталог, купуйте хіти та керуйте своєю бібліотекою.
+        </p>
 
-</body>
-</html>
+        <a href="/catalog/" style="display: inline-block; background: #2196F3; color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-size: 18px; font-weight: bold; transition: 0.3s;">
+            Перейти до Каталогу
+        </a>
+    </div>
+{% endblock %}
