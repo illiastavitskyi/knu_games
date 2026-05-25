@@ -1,0 +1,25 @@
+<h1>Game Catalog</h1>
+
+<form method="get">
+    <input type="text" name="category" placeholder="Category" value="{{ request.GET.category }}">
+    <input type="number" name="min_price" placeholder="Min Price" value="{{ request.GET.min_price }}">
+    <input type="number" name="max_price" placeholder="Max Price" value="{{ request.GET.max_price }}">
+    <input type="date" name="release_date" value="{{ request.GET.release_date }}">
+    <button type="submit">Filter</button>
+</form>
+
+<hr>
+
+<div style="display: flex; flex-wrap: wrap;">
+    {% for game in games %}
+    <div style="border: 1px solid #ccc; padding: 15px; margin: 10px; width: 250px;">
+        {% if game.image %}
+            <img src="{{ game.image.url }}" alt="{{ game.title }}" style="width: 100%;">
+        {% endif %}
+        <h3>{{ game.title }}</h3>
+        <p>Category: {{ game.category }}</p>
+        <p>Price: ${{ game.price }}</p>
+        <a href="/orders/add-to-cart/{{ game.id }}/">Add to Cart</a>
+    </div>
+    {% endfor %}
+</div>
