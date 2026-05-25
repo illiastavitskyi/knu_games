@@ -1,0 +1,12 @@
+<h1>Hello, {{ request.user.username }}!</h1>
+<h2>Your Balance: ${{ profile.balance }}</h2>
+
+<h3>Your Games:</h3>
+<ul>
+    {% for game in purchased_games %}
+        <li>{{ game.title }} ({{ game.category }})</li>
+    {% empty %}
+        <p>You haven't bought any games yet.</p>
+    {% endfor %}
+</ul>
+<a href="/catalog/">Back to Store</a>
